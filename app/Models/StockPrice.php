@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Model;
 
@@ -24,16 +25,36 @@ class StockPrice extends Model
     }
 
     // Scope for date filtering (optional, for reuse)
-    public function scopeRecordedAfterOrOn($query, string|\Carbon\Carbon $date)
+    public function scopeRecordedAfterOrOn($query, string|Carbon $date)
     {
         return $query->where('recorded_at', '>=', $date);
+    }
+
+    public function scopeLatestPriceOfCompany($query, string $company)
+    {
+        return $query->forCompany($company)
+            ->orderByDesc('recorded_at');
+    }
+
+    public function scopeOldestPriceOfCompany($query, string $company)
+    {
+        return $query->forCompany($company)
+            ->orderBy('recorded_at');
+    }
+
+    public function scopeFirstPriceOfCompanyAfter($query, string $company, string|Carbon $date)
+    {
+        return $query->forCompany($company)
+            ->recordedAfterOrOn($date)
+            ->orderBy('recorded_at')
+            ->limit(1);
     }
 
     protected function price(): Attribute
     {
         return Attribute::make(
-            get: fn(string $value) => $value / 1E6,
-            set: fn(string $value) => intval($value * 1E6),
+            get: fn(string $value) => $value / config('stock.price_scale'),
+            set: fn(string $value) => intval($value * config('stock.price_scale')),
         );
 
     }

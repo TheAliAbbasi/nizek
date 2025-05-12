@@ -1,6 +1,7 @@
 <?php
 
 return [
+    'price_scale' => 1_000_000,
     'intervals' => [
         '1D'   => now()->subDay(),
         '1M'   => now()->subMonth(),
