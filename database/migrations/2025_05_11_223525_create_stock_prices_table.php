@@ -10,8 +10,8 @@ return new class extends Migration {
         Schema::create('stock_prices', function (Blueprint $table) {
             $table->id();
             $table->string('company');
-            $table->timestamp('recorded_at')->index();
-            $table->decimal('price', 10, 4);
+            $table->date('recorded_at')->index();
+            $table->integer('price');
             $table->timestamps();
         });
     }
