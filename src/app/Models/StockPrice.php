@@ -33,13 +33,15 @@ class StockPrice extends Model
     public function scopeLatestPriceOfCompany($query, string $company)
     {
         return $query->forCompany($company)
-            ->orderByDesc('recorded_at');
+            ->orderByDesc('recorded_at')
+            ->limit(1);
     }
 
     public function scopeOldestPriceOfCompany($query, string $company)
     {
         return $query->forCompany($company)
-            ->orderBy('recorded_at');
+            ->orderBy('recorded_at')
+            ->limit(1);
     }
 
     public function scopeFirstPriceOfCompanyAfter($query, string $company, string|Carbon $date)

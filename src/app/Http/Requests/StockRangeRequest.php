@@ -16,6 +16,6 @@ class StockRangeRequest extends FormRequest
 
     public function authorize(): bool
     {
-        return true; // adjust if you want auth checks later
+        return true;
     }
 }

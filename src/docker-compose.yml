@@ -1,3 +1,4 @@
+name: nizek
 services:
     laravel.test:
         build:

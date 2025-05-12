@@ -1,0 +1,109 @@
+{
+	"info": {
+		"_postman_id": "8068d5bf-2eb0-4001-9940-a620fbe51544",
+		"name": "Nizek",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "44865772"
+	},
+	"item": [
+		{
+			"name": "intervals endpoint",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{base_url}}/api/stocks/{{symbol}}/changes",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"stocks",
+						"{{symbol}}",
+						"changes"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "range endpoint",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{base_url}}/api/stocks/{{symbol}}/range?start=2025-03-30&end=2025-04-30",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"stocks",
+						"{{symbol}}",
+						"range"
+					],
+					"query": [
+						{
+							"key": "start",
+							"value": "2025-03-30"
+						},
+						{
+							"key": "end",
+							"value": "2025-04-30"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "http://localhost",
+			"type": "string"
+		},
+		{
+			"key": "symbol",
+			"value": "AAPL",
+			"type": "string"
+		}
+	]
+}

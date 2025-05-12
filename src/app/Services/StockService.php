@@ -52,10 +52,10 @@ class StockService
 
         $results = [];
 
-        foreach ($intervals as $label => $configDate) {
+        foreach ($intervals as $label => $interval) {
             $startPrice = match ($label) {
                 'MAX' => $oldest?->price,
-                default => StockPrice::FirstPriceOfCompanyAfter($company, $configDate)->value('price'),
+                default => StockPrice::FirstPriceOfCompanyAfter($company, $interval)->value('price'),
             };
 
             $results[$label] = $this->calculateChange($startPrice, $latest?->price);
@@ -89,11 +89,9 @@ class StockService
                 'start' => $start,
                 'end' => $end,
                 'change' => null,
-                'percent' => null,
+                'unit' => '%',
             ];
         }
-
-        $change = $end - $start;
 
         return [
             'start' => round($start, 2),
